@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GitHub Issues Tracker</title>
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-50">
+
+<!-- Loader -->
+<div id="loader" class="hidden fixed inset-0 flex justify-center items-center bg-white/70 z-50">
+  <span class="loading loading-spinner loading-lg"></span>
+</div>
+
+
+<!-- Navbar -->
+
+<section>
+
+<div class="navbar bg-base-100 shadow-sm px-4 md:px-16">
+
+<div class="flex-1">
+
+<div class="flex items-center gap-2">
+
+<img class="w-8 md:w-10" src="./assets/github-logo.png">
+
+<p class="text-lg md:text-xl font-bold">
+GitHub Issues Tracker
+</p>
+
+</div>
+
+</div>
+
+
+<div class="flex gap-3">
+
+<label class="input input-bordered flex items-center gap-2">
+
+<svg class="h-[1em] opacity-50"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24">
+
+<g stroke-linejoin="round"
+stroke-linecap="round"
+stroke-width="2.5"
+fill="none"
+stroke="currentColor">
+
+<circle cx="11" cy="11" r="8"></circle>
+<path d="m21 21-4.3-4.3"></path>
+
+</g>
+</svg>
+
+<input id="search-input"
+type="search"
+placeholder="Search issues"
+class="grow"/>
+
+</label>
+
+<button onclick="handleSearch()" class="btn btn-primary">
+Search
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- Tabs -->
+
+<section>
+
+<div id="button-con"
+class="w-11/12 mx-auto p-5 mt-10 flex flex-wrap gap-3 shadow border rounded">
+
+<button id="all" class="btn btn-primary">All</button>
+
+<button id="open" class="btn">Open</button>
+
+<button id="closed" class="btn">Closed</button>
+
+</div>
+
+</section>
+
+
+
+<!-- Issues Header -->
+
+<section>
+
+<div
+class="w-11/12 mx-auto p-5 mt-5 shadow border rounded flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+<div class="flex items-center gap-3">
+
+<img class="w-8" src="./assets/Group 1.png">
+
+<div>
+
+<p class="text-lg font-semibold">
+
+<span id="all-count" class="text-xl font-bold"></span>
+Issues
+
+</p>
+
+<p class="text-sm text-gray-500">
+Track and manage your project issues
+</p>
+
+</div>
+
+</div>
+
+
+<div id="stutas-con"
+class="flex gap-4 text-sm font-semibold">
+
+<p id="status-open" class="text-green-600"></p>
+
+<p id="status-closed" class="text-purple-600"></p>
+
+</div>
+
+</div>
+
+
+<!-- Issues Cards -->
+
+<div
+id="All-Issues-Contenar"
+class="w-11/12 mx-auto mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+</div>
+
+</section>
+
+
+<script src="./homepage.js"></script>
+
+</body>
+</html>
