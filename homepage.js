@@ -76,7 +76,7 @@ ${issue.status === "open" ? "border-green-500" : "border-purple-500"} p-4">
      <img src="${
        issue.status === "open"
          ? "./assets/Open-Status.png"
-         : "./assets/Closed-Status.png"
+         : "./assets/Closed- Status .png"
      }" class="w-6 h-6" />
 
     <span class="px-3 py-1 rounded-full bg-red-100 text-red-500 text-xs font-semibold">
