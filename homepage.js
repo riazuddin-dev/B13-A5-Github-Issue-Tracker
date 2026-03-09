@@ -1,7 +1,3 @@
-// ==========================
-// Elements
-// ==========================
-
 const statusClosed = document.getElementById("status-closed");
 const statusOpen = document.getElementById("status-open");
 
@@ -16,213 +12,229 @@ const loader = document.getElementById("loader");
 const searchInput = document.getElementById("search-input");
 
 
-// ==========================
-// Global Data
-// ==========================
+// Modal Elements
+
+const modal = document.getElementById("issue-modal");
+const modalTitle = document.getElementById("modal-title");
+const modalStatus = document.getElementById("modal-status");
+const modalAuthor = document.getElementById("modal-author");
+const modalDate = document.getElementById("modal-date");
+const modalDescription = document.getElementById("modal-description");
+const modalAssignee = document.getElementById("modal-assignee");
+const modalPriority = document.getElementById("modal-priority");
+const modalLabels = document.getElementById("modal-labels");
+
 
 let allIssuesData = [];
 
 
-// ==========================
-// Fetch All Issues
-// ==========================
 
-function fetchIssues() {
+function fetchIssues(){
 
-  loader.classList.remove("hidden");
+loader.classList.remove("hidden");
 
-  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-    .then(res => res.json())
-    .then(data => {
+fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+.then(res=>res.json())
+.then(data=>{
 
-      loader.classList.add("hidden");
+loader.classList.add("hidden");
 
-      allIssuesData = data.data;
+allIssuesData = data.data;
 
-      renderIssues(allIssuesData);
+renderIssues(allIssuesData);
 
-    });
+});
 
 }
 
 
-// ==========================
-// Render Issues
-// ==========================
 
-function renderIssues(issueArray) {
+function renderIssues(issueArray){
 
-  issueContainer.innerHTML = "";
+issueContainer.innerHTML = "";
 
-  totalCount.innerText = issueArray.length;
+totalCount.innerText = issueArray.length;
 
-  const openIssues = issueArray.filter(issue => issue.status === "open");
-  const closedIssues = issueArray.filter(issue => issue.status === "closed");
+const openIssues = issueArray.filter(issue=>issue.status==="open");
+const closedIssues = issueArray.filter(issue=>issue.status==="closed");
 
-  statusOpen.innerText = `Open: ${openIssues.length}`;
-  statusClosed.innerText = `Closed: ${closedIssues.length}`;
+statusOpen.innerText = `Open: ${openIssues.length}`;
+statusClosed.innerText = `Closed: ${closedIssues.length}`;
 
-  issueArray.forEach(issue => {
+issueArray.forEach(issue=>{
 
-    const div = document.createElement("div");
+const div = document.createElement("div");
 
-    div.innerHTML = `
+div.innerHTML = `
 
-<div class="w-80 h-full bg-white rounded-lg shadow-md border-t-4 
-${issue.status === "open" ? "border-green-500" : "border-purple-500"} p-4">
+<div onclick="openModal(${issue.id})"
+class="w-80 h-full bg-white rounded-lg shadow-md border-t-4 
+${issue.status==="open"?"border-green-500":"border-purple-500"} p-4 cursor-pointer">
 
-  <div class="flex justify-between items-center mb-3">
+<div class="flex justify-between items-center mb-3">
 
-     <img src="${
-       issue.status === "open"
-         ? "./assets/Open-Status.png"
-         : "./assets/Closed- Status .png"
-     }" class="w-6 h-6" />
+<img src="${
+issue.status==="open"
+?"./assets/Open-Status.png"
+:"./assets/Closed- Status .png"
+}" class="w-6 h-6"/>
 
-    <span class="px-3 py-1 rounded-full bg-red-100 text-red-500 text-xs font-semibold">
-      ${issue.priority}
-    </span>
+<span class="px-3 py-1 rounded-full bg-red-100 text-red-500 text-xs font-semibold">
+${issue.priority}
+</span>
 
-  </div>
+</div>
 
-  <h2 onclick="openModal(${issue.id})"
-  class="font-semibold text-sm mb-1 cursor-pointer hover:underline text-blue-600">
-    ${issue.title}
-  </h2>
+<h2 class="font-semibold text-sm mb-1 text-blue-600">
+${issue.title}
+</h2>
 
-  <p class="text-xs text-gray-500 mb-3">
-    ${issue.description}
-  </p>
+<p class="text-xs text-gray-500 mb-3">
+${issue.description}
+</p>
 
-  <div class="flex gap-2 mb-4">
+<div class="flex gap-2 mb-4">
 
-    ${issue.labels
-      .map(label => `
-      <span class="px-2 py-1 text-xs rounded-full border bg-gray-100">
-      ${label}
-      </span>
-    `)
-      .join("")}
+${issue.labels.map(label=>`
+<span class="px-2 py-1 text-xs rounded-full border bg-gray-100">
+${label}
+</span>
+`).join("")}
 
-  </div>
+</div>
 
-  <div class="text-xs text-gray-500 space-y-1">
-    <p>Author: ${issue.author}</p>
-    <p>Created: ${new Date(issue.createdAt).toLocaleDateString()}</p>
-  </div>
+<div class="text-xs text-gray-500 space-y-1">
+
+<p>Author: ${issue.author}</p>
+
+<p>Created: ${new Date(issue.createdAt).toLocaleDateString()}</p>
+
+</div>
 
 </div>
 
 `;
 
-    issueContainer.append(div);
+issueContainer.append(div);
 
-  });
+});
 
 }
 
 
-// ==========================
-// Filter Buttons
-// ==========================
 
-openBtn.addEventListener("click", () => {
+openBtn.addEventListener("click",()=>{
 
-  loader.classList.remove("hidden");
+const openIssues = allIssuesData.filter(issue=>issue.status==="open");
 
-  setTimeout(() => {
-
-    const openIssues = allIssuesData.filter(
-      issue => issue.status === "open"
-    );
-
-    renderIssues(openIssues);
-
-    loader.classList.add("hidden");
-
-  }, 400);
+renderIssues(openIssues);
 
 });
 
 
-closedBtn.addEventListener("click", () => {
+closedBtn.addEventListener("click",()=>{
 
-  loader.classList.remove("hidden");
+const closedIssues = allIssuesData.filter(issue=>issue.status==="closed");
 
-  setTimeout(() => {
-
-    const closedIssues = allIssuesData.filter(
-      issue => issue.status === "closed"
-    );
-
-    renderIssues(closedIssues);
-
-    loader.classList.add("hidden");
-
-  }, 400);
+renderIssues(closedIssues);
 
 });
 
 
-allBtn.addEventListener("click", () => {
+allBtn.addEventListener("click",()=>{
 
-  loader.classList.remove("hidden");
-
-  setTimeout(() => {
-
-    renderIssues(allIssuesData);
-
-    loader.classList.add("hidden");
-
-  }, 400);
+renderIssues(allIssuesData);
 
 });
 
 
-// ==========================
-// Active Button Style
-// ==========================
 
 document.getElementById("button-con")
-.addEventListener("click", function(event){
+.addEventListener("click",function(event){
 
-  const btn = event.target;
+const btn = event.target;
 
-  openBtn.classList.remove("btn-primary");
-  closedBtn.classList.remove("btn-primary");
-  allBtn.classList.remove("btn-primary");
+openBtn.classList.remove("btn-primary");
+closedBtn.classList.remove("btn-primary");
+allBtn.classList.remove("btn-primary");
 
-  btn.classList.add("btn-primary");
+btn.classList.add("btn-primary");
 
 });
 
 
-// ==========================
-// Search Function
-// ==========================
 
 function handleSearch(){
 
-  const searchText = searchInput.value.trim();
+const text = searchInput.value.trim();
 
-  loader.classList.remove("hidden");
+fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`)
+.then(res=>res.json())
+.then(data=>{
 
-  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
-  .then(res => res.json())
-  .then(data => {
+renderIssues(data.data);
 
-    loader.classList.add("hidden");
-
-    renderIssues(data.data);
-
-  });
+});
 
 }
 
 
-// ==========================
-// Start App
-// ==========================
+
+function openModal(id){
+
+fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+.then(res=>res.json())
+.then(data=>{
+
+const issue = data.data;
+
+modalTitle.innerText = issue.title;
+
+modalStatus.innerText =
+issue.status==="open"?"Opened":"Closed";
+
+modalAuthor.innerText =
+"Opened by "+issue.author;
+
+modalDate.innerText =
+new Date(issue.createdAt).toLocaleDateString();
+
+modalDescription.innerText =
+issue.description;
+
+modalAssignee.innerText =
+issue.assignee || "Unassigned";
+
+modalPriority.innerText =
+issue.priority;
+
+modalLabels.innerHTML="";
+
+issue.labels.forEach(label=>{
+
+const span=document.createElement("span");
+
+span.className="px-2 py-1 text-xs border rounded";
+
+span.innerText=label;
+
+modalLabels.append(span);
+
+});
+
+modal.classList.remove("hidden");
+
+});
+
+}
+
+
+function closeModal(){
+
+modal.classList.add("hidden");
+
+}
+
+
 
 fetchIssues();
-
