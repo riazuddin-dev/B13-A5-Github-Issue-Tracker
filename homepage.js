@@ -95,12 +95,26 @@ ${issue.description}
 
 <div class="flex gap-2 mb-4">
 
-${issue.labels.map(label=>`
-<span class="px-2 py-1 text-xs rounded-full border bg-gray-100">
+${issue.labels.map(label => {
+
+const labelColor = {
+bug: "bg-red-100 text-red-600 border-red-300",
+"help wanted": "bg-orange-100 text-orange-600 border-orange-300",
+enhancement: "bg-green-100 text-green-600 border-green-300",
+documentation: "bg-blue-100 text-blue-600 border-blue-300",
+"good first issue": "bg-purple-100 text-purple-600 border-purple-300"
+};
+
+const style = labelColor[label.toLowerCase()] || 
+"bg-gray-100 text-gray-600 border-gray-300";
+
+return `
+<span class="px-2 py-1 text-xs rounded-full border ${style}">
 ${label}
 </span>
-`).join("")}
+`;
 
+}).join("")}
 </div>
 
 <div class="text-xs text-gray-500 space-y-1">
