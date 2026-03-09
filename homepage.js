@@ -105,12 +105,23 @@ documentation: "bg-blue-100 text-blue-600 border-blue-300",
 "good first issue": "bg-purple-100 text-purple-600 border-purple-300"
 };
 
-const style = labelColor[label.toLowerCase()] || 
+const labelEmoji = {
+bug: "🐞",
+"help wanted": "🙋",
+enhancement: "✨",
+documentation: "📄",
+"good first issue": "🌟"
+};
+
+const style =
+labelColor[label.toLowerCase()] ||
 "bg-gray-100 text-gray-600 border-gray-300";
+
+const emoji = labelEmoji[label.toLowerCase()] || "🏷️";
 
 return `
 <span class="px-2 py-1 text-xs rounded-full border ${style}">
-${label}
+${emoji} ${label}
 </span>
 `;
 
