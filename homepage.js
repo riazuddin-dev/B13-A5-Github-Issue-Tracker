@@ -68,10 +68,10 @@ const div = document.createElement("div");
 div.innerHTML = `
 
 <div onclick="openModal(${issue.id})"
-class="w-80 h-full bg-white rounded-lg shadow-md border-t-4 
+class="bg-white rounded-lg shadow-md border-t-4 
 ${issue.status==="open"?"border-green-500":"border-purple-500"} p-4 cursor-pointer">
 
-<div class="flex justify-between items-center mb-3">
+<div class="flex  justify-between items-center mb-3">
 
 <img src="${
 issue.status==="open"
