@@ -1,54 +1,43 @@
-# JavaScript Basic Questions
+# 🐛 GitHub Issue Tracker
 
-### 1️⃣ Difference between var, let, and const
+<img width="1920" height="876" alt="image" src="https://github.com/user-attachments/assets/01beccad-3d30-4afd-88e1-e2a923abad07" />
 
-* **var**: Old way to declare a variable. Value can be changed and it can be declared again.
-* **let**: Value can be changed but it cannot be declared again in the same place.
-* **const**: Value cannot be changed after declaring.
 
 ---
 
-### 2️⃣ What is the Spread Operator (...)?
+## 🚀 Overview
 
-The **spread operator (...)** is used to copy or add values from an array or object.
-
-Example:
-
-```javascript
-const arr = [1,2,3];
-const newArr = [...arr,4];
-```
+This is a simple and user-friendly issue tracker web application designed to help users manage and track tasks efficiently. It allows users to create, update, and organize issues in a structured way, making project management easier.
 
 ---
 
-### 3️⃣ Difference between map(), filter(), and forEach()
+## ✨ Features
 
-* **map()** → Changes each value and creates a new array.
-* **filter()** → Selects values based on a condition.
-* **forEach()** → Runs a function on each array value but does not return a new array.
-
----
-
-### 4️⃣ What is an Arrow Function?
-
-An **arrow function** is a short way to write a function.
-
-Example:
-
-```javascript
-const add = (a,b) => a + b;
-```
+- 📝 Create and manage issues  
+- 🗂 Organize tasks efficiently  
+- ❌ Delete or update issues  
+- 🔎 Easy navigation and clean UI  
+- 💾 Data stored locally (local storage)  
 
 ---
 
-### 5️⃣ What are Template Literals?
+## 🛠 Tech Stack
 
-**Template literals** allow variables inside a string.
-Backticks `` ` `` are used instead of quotes.
+- HTML5  
+- CSS3  
+- JavaScript (ES6)  
 
-Example:
+---
 
-```javascript
-const name = "Rahim";
-const text = `My name is ${name}`;
-```
+## 📦 Dependencies
+
+- No external dependencies (Vanilla JavaScript project)
+
+---
+
+## 🖥 Run Locally
+
+```bash
+git clone https://github.com/yourusername/B13-A5-Github-Issue-Tracker.git
+cd B13-A5-Github-Issue-Tracker
+open homepage.html
